@@ -181,7 +181,7 @@ func (s *S) TestURLWriteConcern(c *C) {
 		info, err := mgo.ParseURL(test.url)
 		c.Assert(err, IsNil)
 		c.Assert(info.WriteConcern, NotNil)
-		c.Assert(info.WriteConcern, Equals, test.safe)
+		c.Assert(info.WriteConcern, DeepEquals, test.safe)
 	}
 
 	errorCases := []string{
