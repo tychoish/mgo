@@ -281,9 +281,7 @@ func ParseURL(url string) (*DialInfo, error) {
 	setName := ""
 	poolLimit := 0
 	readPreferenceMode := Primary
-	writeConcern := &Safe{
-		W: 1,
-	}
+	writeConcern := &Safe{}
 	var readPreferenceTagSets []bson.D
 	for _, opt := range uinfo.options {
 		switch opt.key {
