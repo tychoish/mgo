@@ -338,6 +338,9 @@ func ParseURL(url string) (*DialInfo, error) {
 		case "w":
 			intval, err := strconv.Atoi(opt.value)
 			if err == nil {
+				if intval < 0 {
+					return nil, errors.New("w values must be equal or greater than 0")
+				}
 				writeConcern.W = intval
 			} else {
 				writeConcern.WMode = opt.value
@@ -350,7 +353,7 @@ func ParseURL(url string) (*DialInfo, error) {
 			}
 		case "wtimeoutMS":
 			intval, err := strconv.Atoi(opt.value)
-			if err == nil {
+			if err == nil && intval >= 0 {
 				writeConcern.WTimeout = intval
 			} else {
 				return nil, errors.New("invalud wtimeoutMS value: " + opt.value)
